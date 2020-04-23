@@ -8,8 +8,17 @@
 
 #include <applibs/log.h>
 #include <applibs/spi.h>
-
+#include "hw/avnet_mt3620_sk.h"
+#include "../EPD/AzSphere_Interface.h"
 #include "../Fonts/fonts.h"
+
+//#Defines required for proper Driver Configration
+// Defines EPD Display connection Slot 
+#define CLICK_SLOT 1
+
+// Defines Which EPD are you using
+#define EPD_2IN9  // using 2.9" EPd Display with IL3820 Driver 
+
 
 
 int main(void)
@@ -22,11 +31,10 @@ int main(void)
     // It is NOT recommended to use this as a starting point for developing apps; instead use
     // the extensible samples here: https://github.com/Azure/azure-sphere-samples
 
-    const struct timespec sleepTime = {1, 0};
     while (true) {
         Log_Debug("High Level Core tick\n");
-        nanosleep(&sleepTime, NULL);
+        delay_s(1);
         Log_Debug("High Level Core tock\n");
-        nanosleep(&sleepTime, NULL);
+        delay_s(1);
     }
 }

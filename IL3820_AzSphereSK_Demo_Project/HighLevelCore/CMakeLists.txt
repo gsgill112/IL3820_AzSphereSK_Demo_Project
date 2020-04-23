@@ -5,7 +5,7 @@ cmake_minimum_required (VERSION 3.8)
 project (IL3820_AzSphereSK_Demo_Project_HighLevelCore C)
 
 # Create executable
-add_executable (${PROJECT_NAME} main.c "IL3820_AzSphere_Driver.c")
+add_executable (${PROJECT_NAME} main.c "../EPD/IL3820_2in9_Driver.c" "../EPD/AzSphere_Interface.c")
 target_link_libraries (${PROJECT_NAME} applibs pthread gcc_s c)
 
 # Add MakeImage post-build command

@@ -2,10 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\IL3820_AzSphereSK_Demo_Project",
-    "\\IL3820_AzSphereSK_Demo_Project\\Hardware\\avnet_mt3620_sk",
-    "\\IL3820_AzSphereSK_Demo_Project\\Hardware\\avnet_mt3620_sk\\inc",
-    "\\IL3820_AzSphereSK_Demo_Project\\Hardware\\avnet_mt3620_sk\\inc\\hw",
+    "\\IL3820_AzSphereSK_Demo_Project\\EPD",
     "\\IL3820_AzSphereSK_Demo_Project\\HighLevelCore"
   ],
+  "SelectedNode": "\\IL3820_AzSphereSK_Demo_Project\\HighLevelCore\\main.c",
   "PreviewInSolutionExplorer": false
 }
