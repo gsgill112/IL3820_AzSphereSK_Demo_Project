@@ -1,0 +1,13 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "IL3820_AzSphereSK_Demo_Project_HighLevelCore",
+  "ComponentId": "33cd198c-7b8d-42ed-a0ea-de8d8535d172",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "Gpio": [ "$AVNET_MT3620_SK_GPIO2", "$AVNET_MT3620_SK_GPIO42", "$AVNET_MT3620_SK_GPIO43", "$AVNET_MT3620_SK_GPIO16", "$AVNET_MT3620_SK_GPIO17" ],
+    "SpiMaster": [ "$AVNET_MT3620_SK_ISU0_SPI", "$AVNET_MT3620_SK_ISU1_SPI" ],
+    "AllowedApplicationConnections": [ "3fa703f0-bd12-4306-b9d7-682f148e8ce5" ]
+  },
+  "ApplicationType": "Default"
+}

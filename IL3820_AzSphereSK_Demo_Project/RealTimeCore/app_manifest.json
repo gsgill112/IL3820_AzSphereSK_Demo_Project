@@ -1,0 +1,11 @@
+﻿{
+  "SchemaVersion": 1,
+  "Name": "IL3820_AzSphereSK_Demo_Project_RealTimeCore",
+  "ComponentId": "3fa703f0-bd12-4306-b9d7-682f148e8ce5",
+  "EntryPoint": "/bin/app",
+  "CmdArgs": [],
+  "Capabilities": {
+    "AllowedApplicationConnections": [ "33cd198c-7b8d-42ed-a0ea-de8d8535d172" ]
+  },
+  "ApplicationType": "RealTimeCapable"
+}
