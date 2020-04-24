@@ -7,6 +7,7 @@
 
 //Global Includes
 #include <errno.h>
+//#include <stdafx.h>
 
 #include "../HighLevelCore/applibs_versions.h"
 
@@ -15,6 +16,8 @@
 #include <applibs/log.h>
 
 #include "hw/avnet_mt3620_sk.h"
+
+
 
 //Definitions for external Pins based on Click Slot Configured
 #if CLICK_SLOT == 2 
@@ -26,7 +29,7 @@
 #define DC_PIN AVNET_MT3620_SK_GPIO2
 #define BUSY_PIN  AVNET_MT3620_SK_GPIO0
 #define RST_PIN AVNET_MT3620_SK_GPIO16    //Connected to RST Pin on mikroBus Slot 1
-//    Log_Debug("Configured for Mk Bus CLICK SLOT #1");
+//Log_Debug("Configured for Mk Bus CLICK SLOT #1");
 #endif
 
 #define EPD_COMMAND 1 //Sending if command /Data 
@@ -34,8 +37,8 @@
 
 //Defined Variables and Access Pin FD accross EPD Display 
 extern int rstfd, dcfd, busyfd;
-extern uint8_t* spiReadData;
-extern uint8_t* readGPIO;
+extern uint8_t *spiReadData;
+extern uint8_t readGPIO;
 extern ssize_t spi_transferredBytes;
 
 #ifdef EPD_2IN9	//Including Files and Parameterss coorosponding to EPD 2.9" Display 

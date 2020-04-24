@@ -16,13 +16,16 @@
 #include "AzSphere_Interface.h"
 #include "hw/avnet_mt3620_sk.h"
 
+
+//Global Variables
+SPIMaster_Config config;
+ssize_t spi_transferredBytes = -1;
+uint8_t readGPIO = 500;
+
 //Initialiazinf GPIO FD for EPd Display 
 rstfd = -1;
 dcfd = -1;
 busyfd = -1;
-
-//Global Variables
-SPIMaster_Config config;
 
 //Constants Defined for Custom Delay Generation
 const struct timespec delay_1s = { 1, 0 };
@@ -50,7 +53,7 @@ typedef enum {
     ExitCode_Spi_Read = 8,
     ExitCode_SPi_Write = 9
 
-} ExitCode;
+}ExitCode;
 
 // Global Universal Functions Definitations
  
@@ -91,7 +94,7 @@ int EPD_gpio_init(void) {
     dcfd = GPIO_OpenAsOutput(DC_PIN, GPIO_OutputMode_PushPull, GPIO_Value_High);
     busyfd = GPIO_OpenAsInput(BUSY_PIN);
     if (rstfd == -1 || dcfd == -1 || busyfd == -1) {
-        Log_Debug("ERROR : EPD_gpio_init : Could not open gpio Fd\n");
+        Log_Debug("ERROR : EPD_gpio_init : Could not open gpio Fd : Rstfd - %d , dcfd - %d , busyfd = %d\n", rstfd, dcfd, busyfd);
         return ExitCode_Gpio_Open;
     }
 
@@ -152,13 +155,17 @@ int AzSphere_Spi_Init(int fd) {
         return ExitCode_Init_OpenSpiMaster;
     }
 
+    ret =  SPIMaster_SetBitOrder(fd, SPI_BitOrder_MsbFirst);
+
     int result = SPIMaster_SetBusSpeed(fd, 400000);
+    //int result = SPIMaster_SetBusSpeed(fd, 10000000);
     if (result != 0) {
         Log_Debug("ERROR: SPIMaster_SetBusSpeed: %d\n", result);
         return ExitCode_Init_SetBusSpeed;
     }
 
-    result = SPIMaster_SetMode(fd, SPI_Mode_3);
+    //result = SPIMaster_SetMode(fd, SPI_Mode_3);
+    result = SPIMaster_SetMode(fd, SPI_Mode_0);
     if (result != 0) {
         Log_Debug("ERROR: SPIMaster_SetMode: %d\n", result);
         return ExitCode_Init_SetMode;
@@ -175,7 +182,7 @@ int EPD_Busy(void) {
         Log_Debug("ERROR : EPD_Busy : Failed to read GPIO Value : %d\n", ret);
         return ExitCode_Gpio_Read;
     }
-    while (*readGPIO == 1) {      //LOW: idle, HIGH: busy
+    while (readGPIO == 1) {      //LOW: idle, HIGH: busy
         delay_us(100);
     }
     Log_Debug("INFO : EPD_Busy : e-Paper busy released \n");
@@ -219,7 +226,10 @@ int Spi_Write(int fd, uint8_t dc, uint8_t *buf, uint32_t len) {
         GPIO_SetValue(dcfd, GPIO_Value_High);
 
     if (spi_transferredBytes == transfers.length) {
-        return ExitCode_Success;
+        //delay_ms(500);
+        Log_Debug("INFO : Spi_Write : Leaving SPIFD=%d : %d \n", fd, spi_transferredBytes);
+        return spi_transferredBytes;
     }
+
     return ExitCode_SPi_Write;
 }

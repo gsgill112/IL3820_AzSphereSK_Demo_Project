@@ -16,7 +16,7 @@
 #include "AzSphere_Interface.h"
 
 //Defined Variables and Access Pin FD
-int max_x, max_y;
+int max_h, max_w;
 
 
 // Display resolution
@@ -26,37 +26,44 @@ int max_x, max_y;
 #define EPD_2in9_FULL			0
 #define EPD_2in9_PART			1
 
+
 #define EPD_2in9_ORIENT_POTRAIT 0 // Sets Potrait Orient 
 #define EPD_2in9_ORIENT_LANDSCAPE 1  // Sets Landscape Orient
 
 #define BUFFER_SIZE EPD_2in9_WIDTH*EPD_2in9_HEIGHT  //Display Bufffer Size 
 
-// Standard defines for ILI3820 I/F
-#define DRIVER_OUTPUT_CONTROL                       0x01
-#define BOOSTER_SOFT_START_CONTROL                  0x0C
-#define GATE_SCAN_START_POSITION                    0x0F
-#define DEEP_SLEEP_MODE                             0x10
-#define DATA_ENTRY_MODE_SETTING                     0x11
-#define SW_RESET                                    0x12
-#define TEMPERATURE_SENSOR_CONTROL                  0x1A
-#define MASTER_ACTIVATION                           0x20
-#define DISPLAY_UPDATE_CONTROL_1                    0x21
-#define DISPLAY_UPDATE_CONTROL_2                    0x22
-#define WRITE_RAM                                   0x24
-#define WRITE_VCOM_REGISTER                         0x2C
-#define WRITE_LUT_REGISTER                          0x32
-#define SET_DUMMY_LINE_PERIOD                       0x3A
-#define SET_GATE_TIME                               0x3B
-#define BORDER_WAVEFORM_CONTROL                     0x3C
-#define SET_RAM_X_ADDRESS_START_END_POSITION        0x44
-#define SET_RAM_Y_ADDRESS_START_END_POSITION        0x45
-#define SET_RAM_X_ADDRESS_COUNTER                   0x4E
-#define SET_RAM_Y_ADDRESS_COUNTER                   0x4F
-#define TERMINATE_FRAME_READ_WRITE                  0xFF
+// Standard register set for ILI3820 I/F
+static const uint8_t DRIVER_OUTPUT_CONTROL = 0x01;
+static const uint8_t BOOSTER_SOFT_START_CONTROL = 0x0C;
+static const uint8_t GATE_SCAN_START_POSITION = 0x0F;
+static const uint8_t DEEP_SLEEP_MODE = 0x10;
+static const uint8_t DATA_ENTRY_MODE_SETTING = 0x11;
+static const uint8_t SW_RESET = 0x12;
+static const uint8_t TEMPERATURE_SENSOR_CONTROL = 0x1A;
+static const uint8_t MASTER_ACTIVATION = 0x20;
+static const uint8_t DISPLAY_UPDATE_CONTROL_1 = 0x21;
+static const uint8_t DISPLAY_UPDATE_CONTROL_2 = 0x22;
+static const uint8_t WRITE_RAM = 0x24;
+static const uint8_t WRITE_VCOM_REGISTER = 0x2C;
+static const uint8_t WRITE_LUT_REGISTER = 0x32;
+static const uint8_t SET_DUMMY_LINE_PERIOD = 0x3A;
+static const uint8_t SET_GATE_TIME = 0x3B;
+static const uint8_t BORDER_WAVEFORM_CONTROL = 0x3C;
+static const uint8_t SET_RAM_X_ADDRESS_START_END_POSITION = 0x44;
+static const uint8_t SET_RAM_Y_ADDRESS_START_END_POSITION = 0x45;
+static const uint8_t SET_RAM_X_ADDRESS_COUNTER = 0x4E;
+static const uint8_t SET_RAM_Y_ADDRESS_COUNTER = 0x4F;
+static const uint8_t TERMINATE_FRAME_READ_WRITE = 0xFF;
 
 int EPD_Init_2in9(int fd, uint8_t Mode);
 int EPD_Clear_2in9(int fd);
-int EPD_Display_2in9(int fd, uint8_t* Image);
-int EPD_Sleep_2in9(void);
+int EPD_Refresh_2in9(int fd);
+int EPD_Display_Image_2in9(int fd, uint8_t* Image);
+int EPD_Sleep_2in9(int fd);
+int EPD_Turn_On_Display_2in9(int fd);
+int EPD_Set_Orientation_2in9(int orient);
+int EPD_Set_Cursor_2in9(int fd, uint8_t Xs, uint8_t Ys);
+int EPD_Set_Display_Area_2in9(int fd, uint8_t Xs, uint8_t Ys, uint8_t Xe, uint8_t Ye);
+int Display_Init_2in9(int fd);
 
 #endif
