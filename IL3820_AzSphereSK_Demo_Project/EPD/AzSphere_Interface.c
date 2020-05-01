@@ -192,9 +192,9 @@ int EPD_Busy(void) {
 
 // Reads the Value from SPI Bus : Vestigial function as MOSI is NC in the Display Module. 
 // Havent Tested this Function !!
-int Spi_Read(int fd, uint8_t reg, uint8_t *buf, uint32_t len) {
+int Spi_Read(int fd, uint8_t reg, uint8_t buf) {
 
-    if (((uint8_t)SPIMaster_WriteThenRead(fd, &reg, 1, buf, len)) < 0) {
+    if (((uint8_t)SPIMaster_WriteThenRead(fd, &reg, 1, &buf, sizeof(buf))) < 0) {
         Log_Debug("ERROR: SPI Read : unable to WriteThenRead\n");
         return ExitCode_Spi_Read;
     }
@@ -203,7 +203,7 @@ int Spi_Read(int fd, uint8_t reg, uint8_t *buf, uint32_t len) {
 }
 
 //Writes Byte to Spi Bus 
-int Spi_Write(int fd, uint8_t dc, uint8_t *buf, uint32_t len) {
+int Spi_Write(int fd, uint8_t dc, uint8_t buf) {
     const size_t       transferCount = 1;
     SPIMaster_Transfer transfers;
 
@@ -214,8 +214,8 @@ int Spi_Write(int fd, uint8_t dc, uint8_t *buf, uint32_t len) {
     }
 
     transfers.flags = SPI_TransferFlags_Write;
-    transfers.writeData = buf;
-    transfers.length = len; //sizeof(buf);
+    transfers.writeData = &buf;
+    transfers.length = 1; //sizeof(buf);
 
     if (dc == 1) //if sending a Command
         GPIO_SetValue(dcfd, GPIO_Value_Low);

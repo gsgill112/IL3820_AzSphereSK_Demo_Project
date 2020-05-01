@@ -16,12 +16,12 @@
 #include "AzSphere_Interface.h"
 
 //Defined Variables and Access Pin FD
-int max_h, max_w;
+extern uint16_t max_h, max_w;
 
 
 // Display resolution
-#define EPD_2in9_WIDTH       128
-#define EPD_2in9_HEIGHT      296
+///extern uint16_t EPD_2in9_WIDTH = 128;
+///extern uint16_t EPD_2in9_HEIGHT = 296;
 
 #define EPD_2in9_FULL			0
 #define EPD_2in9_PART			1
@@ -30,7 +30,7 @@ int max_h, max_w;
 #define EPD_2in9_ORIENT_POTRAIT 0 // Sets Potrait Orient 
 #define EPD_2in9_ORIENT_LANDSCAPE 1  // Sets Landscape Orient
 
-#define BUFFER_SIZE EPD_2in9_WIDTH*EPD_2in9_HEIGHT  //Display Bufffer Size 
+//#define BUFFER_SIZE EPD_2in9_WIDTH*EPD_2in9_HEIGHT  //Display Bufffer Size 
 
 // Standard register set for ILI3820 I/F
 static const uint8_t DRIVER_OUTPUT_CONTROL = 0x01;
@@ -59,11 +59,12 @@ int EPD_Init_2in9(int fd, uint8_t Mode);
 int EPD_Clear_2in9(int fd);
 int EPD_Refresh_2in9(int fd);
 int EPD_Display_Image_2in9(int fd, uint8_t* Image);
+int EPD_Display_Image_2in9_test(int fd, uint8_t* Image);
 int EPD_Sleep_2in9(int fd);
 int EPD_Turn_On_Display_2in9(int fd);
 int EPD_Set_Orientation_2in9(int orient);
 int EPD_Set_Cursor_2in9(int fd, uint8_t Xs, uint8_t Ys);
-int EPD_Set_Display_Area_2in9(int fd, uint8_t Xs, uint8_t Ys, uint8_t Xe, uint8_t Ye);
+int EPD_Set_Display_Area_2in9(int fd, uint16_t Xs, uint16_t Ys, uint16_t Xe, uint16_t Ye);
 int Display_Init_2in9(int fd);
 
 #endif

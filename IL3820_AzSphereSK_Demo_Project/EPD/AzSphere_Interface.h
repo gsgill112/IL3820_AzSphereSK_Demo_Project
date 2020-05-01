@@ -54,7 +54,7 @@ int EPD_gpio_init(void);   // Initialization of GPIO Reqd for EPD Ref above for 
 int EPD_reset(void);   // Initialization of GPIO Reqd for EPD Ref above for Pin Layouts
 int AzSphere_Spi_Init(int fd);  // returns the SPI FD, for further use 
 int EPD_Busy(void);   // Checks weather EPD IS Busy or Not (You can use Fixed Delay if Not using the pin
-int Spi_Write(int fd, uint8_t dc, uint8_t* buf, uint32_t len); //Writes Byte to Spi Bus 
-int Spi_Read(int fd, uint8_t reg, uint8_t* buf, uint32_t len); // Reads the Value from SPI Bus : Vestigial function as MOSI is NC in the Display Module. 
+int Spi_Write(int fd, uint8_t dc, uint8_t buf); //Writes Byte to Spi Bus 
+int Spi_Read(int fd, uint8_t reg, uint8_t buf); // Reads the Value from SPI Bus : Vestigial function as MOSI is NC in the Display Module. 
 
 #endif
